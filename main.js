@@ -167,21 +167,30 @@ function createLabel(title, dataArr) {
       </div>
     </div>
     <table style=\"margin-top: 4px;width:100%;border-collapse:collapse;background:#232a32;border-radius:0 0 6px 6px;border:1px solid #3a4a5a;box-sizing:border-box;max-height:320px;overflow-y:auto;display:block;\">
-      <tbody style=\"display:block;max-height:320px;overflow-y:auto;width:100%;\">
+      <style>
+        .ellipsis {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 100%;
+          display: inline-block;
+        }
+      </style>
+      <tbody style=\"display:block;max-height:320px;overflow-y:auto;\">
         ${
           dataArr && dataArr.length > 0
             ? dataArr
                 .map(
                   (item, idx) => `
-          <tr style=\"border-bottom:1px solid #3a4a5a;width:100%;display:flex;\">
-            <td style=\"padding:8px 6px;color:#fff;font-size:12px;width:154px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;\" title=\"${
+          <tr style=\"border-bottom:1px solid #3a4a5a;\">
+            <td style=\"padding:8px 6px;color:#fff;font-size:12px;width:182px;min-width:182px;max-width:182px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;\" title=\"${
               item.name || item.code
             }\">
               <span style=\"color:#1ecfff;\">▪</span> ${item.name || item.code}
             </td>
             <td style=\"text-align:right;padding:8px 6px;font-weight:bold;color:${
               item.color
-            };font-size:12px;border-left:1px solid #3a4a5a;width:78px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;\" title=\"${
+            };font-size:12px;border-left:1px solid #3a4a5a;width:78px;min-width:78px;max-width:78px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;\" title=\"${
                     item.value ?? ""
                   }\">
               ${item.value ?? ""}
@@ -190,7 +199,7 @@ function createLabel(title, dataArr) {
         `
                 )
                 .join("")
-            : '<tr style="width:100%;display:flex;"><td style="padding:8px 6px;color:#fff;font-size:12px;width:154px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">暂无数据</td><td style="text-align:right;padding:8px 6px;font-weight:bold;color:#fff;font-size:12px;border-left:1px solid #3a4a5a;width:78px;"></td></tr>'
+            : '<tr><td style="padding:8px 6px;color:#fff;font-size:12px;width:182px;min-width:182px;max-width:182px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">暂无数据</td><td style="text-align:right;padding:8px 6px;font-weight:bold;color:#fff;font-size:12px;border-left:1px solid #3a4a5a;width:78px;min-width:78px;max-width:78px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></td></tr>'
         }
       </tbody>
     </table>
@@ -256,18 +265,19 @@ loadModel(scene)
       leftAnchor,
       rightAnchor,
     }) => {
-      controls.target.copy(center);
-      camera.position.copy(cameraPosition);
-      // 将相机位置和目标点向上移动4个单位
-      camera.position.y += 4;
+      // 将中心点向上移动 4 个单位
       center.y += 4;
       controls.target.copy(center);
+
+      // 将相机位置也相应上移
+      cameraPosition.y += 4;
+      camera.position.copy(cameraPosition);
       camera.lookAt(center);
-      controls.minDistance = camera.position.distanceTo(center);
+      controls.minDistance = 2;
       controls.maxDistance = camera.position.distanceTo(center) + 2;
       controls.update();
 
-      // 坐标轴辅助
+      // 坐标轴辅助也相应上移
       const axesHelper = new THREE.AxesHelper(2);
       axesHelper.position.copy(center);
       scene.add(axesHelper);
