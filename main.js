@@ -167,23 +167,30 @@ function createLabel(title, dataArr) {
       </div>
     </div>
     <table style=\"margin-top: 4px;width:100%;border-collapse:collapse;background:#232a32;border-radius:0 0 6px 6px;border:1px solid #3a4a5a;box-sizing:border-box;max-height:320px;overflow-y:auto;display:block;\">
-      <tbody style=\"display:block;max-height:320px;overflow-y:auto;\">
+      <tbody style=\"display:block;max-height:320px;overflow-y:auto;width:100%;\">
         ${
           dataArr && dataArr.length > 0
             ? dataArr
                 .map(
                   (item, idx) => `
-          <tr style=\"border-bottom:1px solid #3a4a5a;\"><td style=\"padding:8px 6px;color:#fff;font-size:12px;\"><span style=\"color:#1ecfff;\">▪</span> ${
-            item.name || item.code
-          }</td><td style=\"text-align:right;padding:8px 6px;font-weight:bold;color:${
-                    item.color
-                  };font-size:12px;border-left:1px solid #3a4a5a;\">${
+          <tr style=\"border-bottom:1px solid #3a4a5a;width:100%;display:flex;\">
+            <td style=\"padding:8px 6px;color:#fff;font-size:12px;width:154px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;\" title=\"${
+              item.name || item.code
+            }\">
+              <span style=\"color:#1ecfff;\">▪</span> ${item.name || item.code}
+            </td>
+            <td style=\"text-align:right;padding:8px 6px;font-weight:bold;color:${
+              item.color
+            };font-size:12px;border-left:1px solid #3a4a5a;width:78px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;\" title=\"${
                     item.value ?? ""
-                  }</td></tr>
+                  }\">
+              ${item.value ?? ""}
+            </td>
+          </tr>
         `
                 )
                 .join("")
-            : '<tr><td style="padding:8px 6px;color:#fff;font-size:12px;">暂无数据</td><td style="text-align:right;padding:8px 6px;font-weight:bold;color:#fff;font-size:12px;border-left:1px solid #3a4a5a;"></td></tr>'
+            : '<tr style="width:100%;display:flex;"><td style="padding:8px 6px;color:#fff;font-size:12px;width:154px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">暂无数据</td><td style="text-align:right;padding:8px 6px;font-weight:bold;color:#fff;font-size:12px;border-left:1px solid #3a4a5a;width:78px;"></td></tr>'
         }
       </tbody>
     </table>
@@ -251,8 +258,12 @@ loadModel(scene)
     }) => {
       controls.target.copy(center);
       camera.position.copy(cameraPosition);
+      // 将相机位置和目标点向上移动4个单位
+      camera.position.y += 4;
+      center.y += 4;
+      controls.target.copy(center);
       camera.lookAt(center);
-      controls.minDistance = 2;
+      controls.minDistance = camera.position.distanceTo(center);
       controls.maxDistance = camera.position.distanceTo(center) + 2;
       controls.update();
 
