@@ -16,7 +16,7 @@ export function loadModel(scene) {
     loader.setDRACOLoader(dracoLoader);
 
     loader.load(
-      "public/service.glb", // 模型路径
+      "./service.glb", // 模型路径
       function (gltf) {
         const model = gltf.scene;
 
@@ -99,7 +99,7 @@ export function loadPlaneModel(scene) {
     loader.setDRACOLoader(dracoLoader);
 
     loader.load(
-      "public/plane.glb", // 飞机模型路径
+      "./plane.glb", // 飞机模型路径
       function (gltf) {
         const model = gltf.scene;
 
