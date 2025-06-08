@@ -5,4 +5,9 @@ export default {
       three: "three",
     },
   },
+  build: {
+    outDir: "docs",
+    assetsDir: "assets",
+    emptyOutDir: true,
+  },
 };
