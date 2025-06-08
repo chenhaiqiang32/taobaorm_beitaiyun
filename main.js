@@ -266,15 +266,15 @@ loadModel(scene)
       rightAnchor,
     }) => {
       // 将中心点向上移动 4 个单位
-      center.y += 4;
+      center.y += 2;
       controls.target.copy(center);
 
       // 将相机位置也相应上移
-      cameraPosition.y += 4;
+      cameraPosition.y += 2;
       camera.position.copy(cameraPosition);
       camera.lookAt(center);
-      controls.minDistance = 2;
-      controls.maxDistance = camera.position.distanceTo(center) + 2;
+      controls.minDistance = camera.position.distanceTo(center);
+      controls.maxDistance = camera.position.distanceTo(center) + 1.2;
       controls.update();
 
       // 坐标轴辅助也相应上移
