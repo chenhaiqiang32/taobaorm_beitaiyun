@@ -166,7 +166,7 @@ function createLabel(title, dataArr) {
         <span style="\n        color: #ffffff;\n        font-family: 'Source Han Sans CN';\n        font-size: 14px;\n        font-style: normal;\n        font-weight: 700;\n        line-height: 32px;\n        letter-spacing: 2px;\n        ">${title}</span>
       </div>
     </div>
-    <table style=\"margin-top: 4px;width:100%;border-collapse:collapse;background:#232a32;border-radius:0 0 6px 6px;border:1px solid #3a4a5a;box-sizing:border-box;max-height:320px;overflow-y:auto;display:block;\">
+    <table style=\"margin-top: 4px;width:100%;border-collapse:collapse;background:#232a32;border-radius:0 0 6px 6px;border:1px solid #3a4a5a;box-sizing:border-box;max-height:320px;\">
       <style>
         .ellipsis {
           white-space: nowrap;
@@ -174,6 +174,14 @@ function createLabel(title, dataArr) {
           text-overflow: ellipsis;
           max-width: 100%;
           display: inline-block;
+        }
+        /* 隐藏滚动条但保持滚动功能 */
+        tbody::-webkit-scrollbar {
+          display: none;
+        }
+        tbody {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
         }
       </style>
       <tbody style=\"display:block;max-height:320px;overflow-y:auto;\">
@@ -230,7 +238,7 @@ function renderLabels() {
     rightLabel = null;
   }
   rightLabel = new CSS2DObject(createLabel("温振终端数据", warmData));
-  rightLabel.position.set(1.68, 2.8, 0);
+  rightLabel.position.set(2.08, 2.8, 0);
   rightLabel.center.set(0.5, 1);
   scene.add(rightLabel);
 }
@@ -270,7 +278,9 @@ loadModel(scene)
       controls.target.copy(center);
 
       // 将相机位置也相应上移
-      cameraPosition.y += 2;
+      cameraPosition.y -= 2;
+      cameraPosition.x -= 2.8;
+      cameraPosition.z += 0.8;
       camera.position.copy(cameraPosition);
       camera.lookAt(center);
       controls.minDistance = camera.position.distanceTo(center);
@@ -340,8 +350,8 @@ loadModel(scene)
       scene.add(createCircleMarker(end1));
 
       // 右侧直线
-      const start2 = new THREE.Vector3(1.649, 1.492, -0.142);
-      const end2 = new THREE.Vector3(1.68, 2.8, 0);
+      const start2 = new THREE.Vector3(2.049, 1.492, -0.142);
+      const end2 = new THREE.Vector3(2.08, 2.8, 0);
       scene.add(createPolyline([start2, end2]));
       scene.add(createCircleMarker(start2));
       scene.add(createCircleMarker(end2));
