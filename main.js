@@ -76,7 +76,7 @@ function createTopTitle(name) {
     div.style.left = "50%";
     div.style.transform = "translateX(-50%)";
     div.style.zIndex = "9999";
-    div.style.display = "flex";
+    div.style.display = "none";
     div.style.alignItems = "center";
 
     document.body.appendChild(div);
@@ -166,7 +166,7 @@ function createLabel(title, dataArr) {
         <span style="\n        color: #ffffff;\n        font-family: 'Source Han Sans CN';\n        font-size: 14px;\n        font-style: normal;\n        font-weight: 700;\n        line-height: 32px;\n        letter-spacing: 2px;\n        ">${title}</span>
       </div>
     </div>
-    <table style=\"margin-top: 4px;width:100%;border-collapse:collapse;background:#232a32;border-radius:0 0 6px 6px;border:1px solid #3a4a5a;box-sizing:border-box;max-height:320px;\">
+    <table style=\"margin-top: 4px;width:287px;border-collapse:collapse;background:#232a32;border-radius:0 0 6px 6px;border:1px solid #3a4a5a;box-sizing:border-box;max-height:320px;table-layout:fixed;\">
       <style>
         .ellipsis {
           white-space: nowrap;
@@ -175,30 +175,22 @@ function createLabel(title, dataArr) {
           max-width: 100%;
           display: inline-block;
         }
-        /* 隐藏滚动条但保持滚动功能 */
-        tbody::-webkit-scrollbar {
-          display: none;
-        }
-        tbody {
-          -ms-overflow-style: none;  /* IE and Edge */
-          scrollbar-width: none;  /* Firefox */
-        }
       </style>
-      <tbody style=\"display:block;max-height:320px;overflow-y:auto;\">
+      <tbody style=\"display:block;max-height:320px;overflow-y:auto;width:287px;\">
         ${
           dataArr && dataArr.length > 0
             ? dataArr
                 .map(
                   (item, idx) => `
-          <tr style=\"border-bottom:1px solid #3a4a5a;\">
-            <td style=\"padding:8px 6px;color:#fff;font-size:12px;width:182px;min-width:182px;max-width:182px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;\" title=\"${
+          <tr style=\"border-bottom:1px solid #3a4a5a;width:287px;\">
+            <td style=\"padding:8px 6px;color:#fff;font-size:12px;width:182px;min-width:182px;max-width:182px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-sizing:border-box;\" title=\"${
               item.name || item.code
             }\">
               <span style=\"color:#1ecfff;\">▪</span> ${item.name || item.code}
             </td>
             <td style=\"text-align:right;padding:8px 6px;font-weight:bold;color:${
               item.color
-            };font-size:12px;border-left:1px solid #3a4a5a;width:78px;min-width:78px;max-width:78px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;\" title=\"${
+            };font-size:12px;border-left:1px solid #3a4a5a;width:78px;min-width:78px;max-width:78px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-sizing:border-box;\" title=\"${
                     item.value ?? ""
                   }\">
               ${item.value ?? ""}
@@ -207,7 +199,7 @@ function createLabel(title, dataArr) {
         `
                 )
                 .join("")
-            : '<tr><td style="padding:8px 6px;color:#fff;font-size:12px;width:182px;min-width:182px;max-width:182px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">暂无数据</td><td style="text-align:right;padding:8px 6px;font-weight:bold;color:#fff;font-size:12px;border-left:1px solid #3a4a5a;width:78px;min-width:78px;max-width:78px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></td></tr>'
+            : '<tr style="width:287px;"><td style="padding:8px 6px;color:#fff;font-size:12px;width:182px;min-width:182px;max-width:182px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-sizing:border-box;">暂无数据</td><td style="text-align:right;padding:8px 6px;font-weight:bold;color:#fff;font-size:12px;border-left:1px solid #3a4a5a;width:78px;min-width:78px;max-width:78px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-sizing:border-box;"></td></tr>'
         }
       </tbody>
     </table>
