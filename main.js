@@ -163,7 +163,11 @@ function createLabel(title, dataArr) {
       </div>
       <!-- 标题部分 -->
       <div style="flex:1;display:flex;width: 237px;\nheight: 32px;\nline-height: 32px;\npadding-left: 12px;\nflex-shrink: 0;\nborder: 1px solid #2fdaff80;\nbackground: linear-gradient(90deg, #2fdaff00 0%, #2FDAFF 100%);">
-        <span style="\n        color: #ffffff;\n        font-family: 'Source Han Sans CN';\n        font-size: 14px;\n        font-style: normal;\n        font-weight: 700;\n        line-height: 32px;\n        letter-spacing: 2px;\n        ">${title}</span>
+        <span style="\n        color: #ffffff;\n        font-family: 'Source Han Sans CN';\n        font-size: 14px;\n        font-style: normal;\n        font-weight: 700;\n        line-height: 32px;\n        letter-spacing: 2px;\n        white-space: nowrap;\n        overflow: hidden;\n        text-overflow: ellipsis;\n        max-width: 100%;\n        " title="${title}${
+    dataArr && dataArr.length > 0 ? "(" + dataArr[0].code + ")" : ""
+  }">${title}${
+    dataArr && dataArr.length > 0 ? " (" + dataArr[0].code + ")" : ""
+  }</span>
       </div>
     </div>
     <table style=\"margin-top: 4px;width:287px;border-collapse:collapse;background:#232a32;border-radius:0 0 6px 6px;border:1px solid #3a4a5a;box-sizing:border-box;max-height:320px;table-layout:fixed;\">
