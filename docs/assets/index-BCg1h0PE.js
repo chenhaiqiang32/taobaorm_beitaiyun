@@ -3871,7 +3871,11 @@ background: linear-gradient(90deg, #2fdaff00 0%, #2FDAFF 100%);">
         font-weight: 700;
         line-height: 32px;
         letter-spacing: 2px;
-        ">${s}</span>
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+        " title="${s}${e&&e.length>0?"("+e[0].code+")":""}">${s}${e&&e.length>0?" ("+e[0].code+")":""}</span>
       </div>
     </div>
     <table style="margin-top: 4px;width:287px;border-collapse:collapse;background:#232a32;border-radius:0 0 6px 6px;border:1px solid #3a4a5a;box-sizing:border-box;max-height:320px;table-layout:fixed;">
