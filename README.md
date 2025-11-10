@@ -1,1 +1,1 @@
-预览地址：https://github.com/chenhaiqiang32/taobaorm_beitaiyun
+预览地址：https://chenhaiqiang32.github.io/taobaorm_beitaiyun/
